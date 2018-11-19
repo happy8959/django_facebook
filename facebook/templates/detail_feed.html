@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>상세피드</title>
+
+        <style>
+        /* 이 밑으로는 코멘트와 관련된 스타일입니다. */
+        /* 이 안에 둘러쌓인 글은 프로그램에 영향을 미치지 않는 메모입니다. */
+        .comment_list {
+            background-color: #f0f1f4;
+            border-bottom: 1px solid #bcbdc3;
+            padding-top: 0.1px;
+        }
+
+        .comment {
+            background-color: #fff;
+            border-radius: 30px;
+            margin: 15px;
+            padding: 15px;
+            margin-bottom: 0;
+        }
+
+        .comment__date {
+            margin: 0 15px;
+            padding: 8px 15px;
+            padding-bottom: 0px;
+            font-size: 13px;
+        }
+
+        .name {
+            font-weight: bold;
+            color: #445994;
+        }
+
+        .form-wrapper {
+            padding: 15px;
+        }
+
+        /* 똑같은 스타일을 적용하고 싶으면 ,를 입력해주면 됩니다. */
+        .form-wrapper input,
+        .form-wrapper textarea {
+            border: 1px solid #ddd;
+            width: 100%;
+            padding: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            margin-top: 2px;
+            margin-bottom: 5px;
+        }
+
+        button {
+            border: 1px solid #405ea3;
+            background-color: #4967ad;
+            color: #fff;
+            font-weight: 500;
+            font-size: 15px;
+            padding: 3px 16px;
+            border-radius: 2px;
+        }
+    </style>
+
+</head>
+<body>
+자세히 보기 임시 페이지
+{{ feed.author }} <br>
+{{ feed.title }} <br>
+{{ feed.text }} <br>
+
+<div class="comment_list">
+    {% for comment in feed.comments.all %}
+    <div class="comment"><span class="name">코멘트 글쓴이{{comment.author}}</span> 코멘트 내용{{comment.text}}</div>
+    <div class="comment__date">코멘트 생성일 {{comment.created_at}} <a href="/코멘트삭제주소"><img src="/static/ic_delete.png" height="16px"></a></div>
+    {% endfor %}
+<div class ="form-wrapper">
+    <span class="help">Comments</span>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type = "text" name="nickname" placeholder="닉네임" /> <br/>
+        <input type="password" name="password" placeholder="패스워드" /> <br/>
+        <textarea name="replay" placeholder="댓글 내용"></textarea>
+        <button type="submit"> 댓글 작성 </button>
+    </form>
+</div>
+</div>
+
+
+</body>
+</html>
